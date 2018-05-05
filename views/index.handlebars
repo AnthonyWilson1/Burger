@@ -1,53 +1,33 @@
+<img class= 'img' src='https://www.chimpstickers.com/wp-content/uploads/2017/11/cute-things024-hamburguer.png'>
 <h3>Eat The Burger</h3>
+<hr>
 
-{{#each burger}}
-  <p>ID: {{this.id}}</p> 
-  <p>Burger: {{this.burger_name}}</p>
-   <button data-burgerid="{{this.id}}" class="delBurger">Consume Burger!</button>
-{{/each}}
+<div class='eaten'>
+  <p>Burgers Eaten</p>
+  <ul>
+  {{#each burger}}
+  {{#unless devoured}}
+    {{> burger/burger-block devour=1}}
+  {{/unless}}
+  {{/each}}
+  </ul>
+</div>
+ 
+ <div class='notEaten'>
+  <p>Burgers Not Eaten</p>
+  <ul>
+  {{#each burger}}
+  {{#if devoured}}
+    {{> burger/burger-block devour=0}}
+  {{/if}}
+  {{/each}}
+  </ul>
+</div>
 
+<div class= 'form'>
 <form id="addBurger">
   <input type="text" name="burger">
   <button type="submit">Submit Burger!</button>
 </form>
+</div>
 
-
-<script>
-
- $("#addBurger").on("submit", function(event) {
-    event.preventDefault();
-    var newBurger = {
-        burger: $("input[name=burger]").val()
-    }
-    $.ajax("/burgers", {
-      type: "POST",
-      data: newBurger
-    }).then(
-      function() {
-        console.log("updated burger");
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
-
-});
-
-$(document).on('click','.delBurger', function(event){
-    event.preventDefault();
-    var updatedBurger = {
-        id: $(this).data("burgerid"),
-    }
-    $.ajax("/burgers/" + updatedBurger.id, {
-      type: "PUT",
-      data: updatedBurger
-    }).then(
-      function() {
-        console.log("updated burger");
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
-
-});
-
-</script>

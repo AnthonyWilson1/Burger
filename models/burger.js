@@ -1,8 +1,7 @@
 const method = require('../config/orm.js')
 
 module.exports = {
-    all: (param)=>method.selectAll(param),
     insert: (param)=>method.insertOne(param),
-    update: (param)=>method.updateOne(param),
+    update: (param,param2)=>method.updateOne(param,param2),
     api: () => method.selectApi()
 }

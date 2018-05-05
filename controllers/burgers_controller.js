@@ -6,17 +6,14 @@ module.exports = {
     all: (param) => {
          return commands.all(param)
     },
-    // allFalse: (param) => {
-    //     commands.all(param)
-    // },
     allApi: () => {
-        return api
+        return commands.api()
     },
-    update: (param) => {
-         commands.update(param);
+    update: (param,param2) => {
+         return commands.update(param,param2);
     },
-    insert: (param) => {
-        commands.insert(param);
+    insert: (param,param2) => {
+        return commands.insert(param);
    },
 }
 
