@@ -1,5 +1,5 @@
 const con = require('./connection.js')
-const pool = con.mysql
+const pool = con;
 
 var methods = {
 insertOne: function(valOfBurger) {
